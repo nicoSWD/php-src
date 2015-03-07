@@ -126,13 +126,16 @@ ZEND_END_ARG_INFO()
 /* {{{ iconv_functions[]
  */
 const zend_function_entry iconv_functions[] = {
-	PHP_RAW_NAMED_FE(iconv,php_if_iconv,				arginfo_iconv)
+	PHP_RAW_NAMED_FE(iconv,php_if_iconv,			arginfo_iconv)
 	PHP_FE(iconv_get_encoding,						arginfo_iconv_get_encoding)
 	PHP_FE(iconv_set_encoding,						arginfo_iconv_set_encoding)
 	PHP_FE(iconv_strlen,							arginfo_iconv_strlen)
+    PHP_FALIAS(iconv_str_len,   iconv_strlen,       arginfo_iconv_strlen)
 	PHP_FE(iconv_substr,							arginfo_iconv_substr)
 	PHP_FE(iconv_strpos,							arginfo_iconv_strpos)
+    PHP_FALIAS(iconv_str_pos,   iconv_strpos,       arginfo_iconv_strpos)
 	PHP_FE(iconv_strrpos,							arginfo_iconv_strrpos)
+    PHP_FALIAS(iconv_str_rpos,  iconv_strrpos,      arginfo_iconv_strrpos)
 	PHP_FE(iconv_mime_encode,						arginfo_iconv_mime_encode)
 	PHP_FE(iconv_mime_decode,						arginfo_iconv_mime_decode)
 	PHP_FE(iconv_mime_decode_headers,				arginfo_iconv_mime_decode_headers)
