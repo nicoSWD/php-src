@@ -2769,10 +2769,13 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(implode,															arginfo_implode)
 	PHP_FALIAS(join,				implode,								arginfo_implode)
 	PHP_FE(setlocale,														arginfo_setlocale)
+    PHP_FALIAS(locale_set, setlocale,                                       arginfo_setlocale)
 	PHP_FE(localeconv,														arginfo_localeconv)
+    PHP_FALIAS(locale_conv, localeconv,                                     arginfo_localeconv)
 
 #if HAVE_NL_LANGINFO
 	PHP_FE(nl_langinfo,														arginfo_nl_langinfo)
+    PHP_FALIAS(locale_info, nl_langinfo,                                    arginfo_nl_langinfo)
 #endif
 
 	PHP_FE(soundex,															arginfo_soundex)
