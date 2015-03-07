@@ -110,8 +110,12 @@ PHP_MINIT_FUNCTION(nl_langinfo);
 
 #define strnatcmp(a, b) \
 	strnatcmp_ex(a, strlen(a), b, strlen(b), 0)
+#define str_nat_cmp(a, b) \
+    strnatcmp(a, b)
 #define strnatcasecmp(a, b) \
 	strnatcmp_ex(a, strlen(a), b, strlen(b), 1)
+#define str_nat_case_cmp(a, b) \
+    strnatcasecmp(a, b)
 PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len, int fold_case);
 
 #ifdef HAVE_LOCALECONV
