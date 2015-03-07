@@ -2754,7 +2754,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 #ifdef HAVE_STRCOLL
 	PHP_FE(strcoll,															arginfo_strcoll)
-    PHP_FALIAS(str_coll,            str_coll,                               arginfo_strcoll)
+    PHP_FALIAS(str_coll,            strcoll,                                arginfo_strcoll)
 #endif
 
 #ifdef HAVE_STRFMON
@@ -2800,15 +2800,15 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(implode,															arginfo_implode)
     PHP_FALIAS(str_implode,         implode,                                arginfo_implode)
 	PHP_FALIAS(join,				implode,								arginfo_implode)
-    PHP_FALIAS(str_join             implode,								arginfo_implode)
+    PHP_FALIAS(str_join,            implode,								arginfo_implode)
 	PHP_FE(setlocale,														arginfo_setlocale)
-    PHP_FALIAS(locale_set, setlocale,                                       arginfo_setlocale)
+    PHP_FALIAS(locale_set,          setlocale,                              arginfo_setlocale)
 	PHP_FE(localeconv,														arginfo_localeconv)
-    PHP_FALIAS(locale_conv, localeconv,                                     arginfo_localeconv)
+    PHP_FALIAS(locale_conv,         localeconv,                             arginfo_localeconv)
 
 #if HAVE_NL_LANGINFO
 	PHP_FE(nl_langinfo,														arginfo_nl_langinfo)
-    PHP_FALIAS(locale_info, nl_langinfo,                                    arginfo_nl_langinfo)
+    //PHP_FALIAS(locale_info,         nl_langinfo,                            arginfo_nl_langinfo)
 #endif
 
 	PHP_FE(soundex,															arginfo_soundex)
@@ -2823,7 +2823,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
     PHP_FALIAS(str_get_csv,         str_getcsv,                             arginfo_str_getcsv)
 	PHP_FE(str_pad,															arginfo_str_pad)
 	PHP_FALIAS(chop,				rtrim,									arginfo_rtrim)
-    PHP_FALIAS(str_chop, chop,                                              arginfo_rtrim)
+    PHP_FALIAS(str_chop,            rtrim,                                  arginfo_rtrim)
 	PHP_FALIAS(strchr,				strstr,									arginfo_strstr)
 	PHP_NAMED_FE(sprintf,			PHP_FN(user_sprintf),					arginfo_sprintf)
 	PHP_NAMED_FE(printf,			PHP_FN(user_printf),					arginfo_printf)
@@ -3297,12 +3297,17 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(natsort,															arginfo_natsort)
 	PHP_FE(natcasesort,														arginfo_natcasesort)
 	PHP_FE(asort,															arginfo_asort)
+    
 	PHP_FE(arsort,															arginfo_arsort)
 	PHP_FE(sort,															arginfo_sort)
+    PHP_FALIAS(array_sort,          sort,                                   arginfo_sort)
 	PHP_FE(rsort,															arginfo_rsort)
+    PHP_FALIAS(array_rsort,         rsort,                                  arginfo_rsort)
 	PHP_FE(usort,															arginfo_usort)
+    PHP_FALIAS(array_usort,         usort,                                  arginfo_usort)
 	PHP_FE(uasort,															arginfo_uasort)
 	PHP_FE(uksort,															arginfo_uksort)
+    PHP_FALIAS(array_uksort,        uksort,                                 arginfo_uksort)
 	PHP_FE(shuffle,															arginfo_shuffle)
 	PHP_FE(array_walk,														arginfo_array_walk)
 	PHP_FE(array_walk_recursive,											arginfo_array_walk_recursive)
