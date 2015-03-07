@@ -2806,6 +2806,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(parse_str,														arginfo_parse_str)
     PHP_FALIAS(str_parse,           parse_str,                              arginfo_parse_str)
 	PHP_FE(str_getcsv,														arginfo_str_getcsv)
+    PHP_FALIAS(str_get_csv,         str_getcsv,                             arginfo_str_getcsv)
 	PHP_FE(str_pad,															arginfo_str_pad)
 	PHP_FALIAS(chop,				rtrim,									arginfo_rtrim)
     PHP_FALIAS(str_chop, chop,                                              arginfo_rtrim)
