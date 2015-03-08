@@ -52,6 +52,7 @@ PHP_FUNCTION(max);
 PHP_FUNCTION(in_array);
 PHP_FUNCTION(array_in);
 PHP_FUNCTION(array_search);
+PHP_FUNCTION(array_find);
 PHP_FUNCTION(extract);
 PHP_FUNCTION(compact);
 PHP_FUNCTION(array_fill);
@@ -101,6 +102,7 @@ PHP_FUNCTION(array_product);
 PHP_FUNCTION(array_filter);
 PHP_FUNCTION(array_map);
 PHP_FUNCTION(array_key_exists);
+PHP_FUNCTION(array_key_find);
 PHP_FUNCTION(array_chunk);
 PHP_FUNCTION(array_combine);
 

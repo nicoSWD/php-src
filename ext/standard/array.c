@@ -1310,6 +1310,37 @@ static inline void php_search_array(zval *value, zval *array, zend_bool strict, 
 }
 /* }}} */
 
+/* void php_array_key_exists(zval *value, zval *array, zend_bool strict, int behavior) 
+ */
+static inline void php_array_key_exists(zval *key, HashTable *array, zval *return_value) /* {{{ */
+{
+	zval *entry;
+	zend_ulong num_idx;
+	zend_string *str_idx;
+	
+	switch (Z_TYPE_P(key)) {
+		case IS_STRING:
+			if (zend_symtable_exists(array, Z_STR_P(key))) {
+				RETURN_TRUE;
+			}
+			RETURN_FALSE;
+		case IS_LONG:
+			if (zend_hash_index_exists(array, Z_LVAL_P(key))) {
+				RETURN_TRUE;
+			}
+			RETURN_FALSE;
+		case IS_NULL:
+			if (zend_hash_exists(array, STR_EMPTY_ALLOC())) {
+				RETURN_TRUE;
+			}
+			RETURN_FALSE;
+			
+		default:
+			php_error_docref(NULL, E_WARNING, "The first argument should be either a string or an integer");
+			RETURN_FALSE;
+	}
+}
+
 /* {{{ proto bool in_array(mixed needle, array haystack [, bool strict])
    Checks if the given value exists in the array */
 PHP_FUNCTION(in_array)
@@ -1377,6 +1408,31 @@ PHP_FUNCTION(array_search)
 	ZEND_PARSE_PARAMETERS_START(2, 3)
 	Z_PARAM_ZVAL(value)
 	Z_PARAM_ARRAY(array)
+	Z_PARAM_OPTIONAL
+	Z_PARAM_BOOL(strict)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+	
+	php_search_array(value, array, strict, return_value, 1);
+}
+/* }}} */
+
+/* {{{ proto mixed array_find(array haystack, mixed needle [, bool strict])
+ Searches the array for a given value and returns the corresponding key if successful */
+PHP_FUNCTION(array_find)
+{
+	zval *value;				/* value to check for */
+	zval *array;				/* array to check in */
+	zend_bool strict = 0;		/* strict comparison or not */
+	
+#ifndef FAST_ZPP
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "az|b", &array, &value, &strict) == FAILURE) {
+		return;
+	}
+#else
+	ZEND_PARSE_PARAMETERS_START(2, 3)
+	Z_PARAM_ARRAY(array)
+	Z_PARAM_ZVAL(value)
 	Z_PARAM_OPTIONAL
 	Z_PARAM_BOOL(strict)
 	ZEND_PARSE_PARAMETERS_END();
@@ -5048,29 +5104,30 @@ PHP_FUNCTION(array_key_exists)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
-	switch (Z_TYPE_P(key)) {
-		case IS_STRING:
-			if (zend_symtable_exists(array, Z_STR_P(key))) {
-				RETURN_TRUE;
-			}
-			RETURN_FALSE;
-		case IS_LONG:
-			if (zend_hash_index_exists(array, Z_LVAL_P(key))) {
-				RETURN_TRUE;
-			}
-			RETURN_FALSE;
-		case IS_NULL:
-			if (zend_hash_exists(array, STR_EMPTY_ALLOC())) {
-				RETURN_TRUE;
-			}
-			RETURN_FALSE;
-
-		default:
-			php_error_docref(NULL, E_WARNING, "The first argument should be either a string or an integer");
-			RETURN_FALSE;
-	}
+	php_array_key_exists(key, array, return_value);
 }
 /* }}} */
+
+/* {{{ proto bool array_key_find(array search, mixed key)
+ Checks if the given key or index exists in the array */
+PHP_FUNCTION(array_key_find)
+{
+	zval *key;					/* key to check for */
+	HashTable *array;			/* array to check in */
+	
+#ifndef FAST_ZPP
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "Hz", &array, &key) == FAILURE) {
+		return;
+	}
+#else
+	ZEND_PARSE_PARAMETERS_START(2, 2)
+	Z_PARAM_ARRAY_OR_OBJECT_HT(array)
+	Z_PARAM_ZVAL(key)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+	
+	php_array_key_exists(key, array, return_value);
+}
 
 /* {{{ proto array array_chunk(array input, int size [, bool preserve_keys])
    Split array into chunks */
