@@ -2753,8 +2753,10 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(nl2br,															arginfo_nl2br)
 	PHP_FALIAS(html_nl2br,			nl2br,									arginfo_nl2br)
 	PHP_FE(basename,														arginfo_basename)
+	PHP_FALIAS(path_base_name,		basename,								arginfo_basename)
 	PHP_FE(dirname,															arginfo_dirname)
 	PHP_FE(pathinfo,														arginfo_pathinfo)
+	PHP_FALIAS(path_info,			pathinfo,								arginfo_pathinfo)
 	PHP_FE(stripslashes,													arginfo_stripslashes)
 	PHP_FALIAS(str_slashes_strip,   stripslashes,							arginfo_stripslashes)
 	PHP_FE(stripcslashes,													arginfo_stripcslashes)
@@ -2862,12 +2864,16 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 #if defined(HAVE_SYMLINK) || defined(PHP_WIN32)
 	PHP_FE(readlink,														arginfo_readlink)
+	PHP_FALIAS(link_read,			readlink,								arginfo_readlink)
 	PHP_FE(linkinfo,														arginfo_linkinfo)
+	PHP_FALIAS(link_info,			linkinfo,								arginfo_linkinfo)
 	PHP_FE(symlink,															arginfo_symlink)
+	PHP_FALIAS(link_symbolic,		symlink,								arginfo_symlink)
 	PHP_FE(link,															arginfo_link)
 #endif
 
 	PHP_FE(unlink,															arginfo_unlink)
+	PHP_FALIAS(file_delete,			unlink,									arginfo_unlink)
 	PHP_FE(exec,															arginfo_exec)
 	PHP_FE(system,															arginfo_system)
 	PHP_FALIAS(exec_system,			system,									arginfo_system)
@@ -3073,6 +3079,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 #endif
 	PHP_FE(is_uploaded_file,												arginfo_is_uploaded_file)
 	PHP_FE(move_uploaded_file,												arginfo_move_uploaded_file)
+	PHP_FALIAS(file_move_uploaded,	move_uploaded_file,						arginfo_move_uploaded_file)
 
 	/* functions from dns.c */
 	PHP_FE(gethostbyaddr,													arginfo_gethostbyaddr)
@@ -3121,9 +3128,12 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 	/* functions from file.c */
 	PHP_FE(pclose,															arginfo_pclose)
+	PHP_FALIAS(pipe_close,			pclose,									arginfo_pclose)
 	PHP_FE(popen,															arginfo_popen)
+	PHP_FALIAS(pipe_open,			popen,									arginfo_popen)
 	PHP_FE(readfile,														arginfo_readfile)
 	PHP_FE(rewind,															arginfo_rewind)
+	PHP_FALIAS(frewind,				rewind,									arginfo_rewind)
 	PHP_FE(rmdir,															arginfo_rmdir)
 	PHP_FE(umask,															arginfo_umask)
 	PHP_FE(fclose,															arginfo_fclose)
@@ -3144,8 +3154,11 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(mkdir,															arginfo_mkdir)
 	PHP_FE(rename,															arginfo_rename)
 	PHP_FE(copy,															arginfo_copy)
+	PHP_FALIAS(file_copy,			copy,									arginfo_copy)
 	PHP_FE(tempnam,															arginfo_tempnam)
+	PHP_FALIAS(file_temp_name,		tempnam,								arginfo_tempnam)
 	PHP_NAMED_FE(tmpfile,			php_if_tmpfile,							arginfo_tmpfile)
+	PHP_NAMED_FE(ftemp,				php_if_tmpfile,							arginfo_tmpfile)
 	PHP_FE(file,															arginfo_file)
 	PHP_FE(file_get_contents,												arginfo_file_get_contents)
 	PHP_FE(file_put_contents,												arginfo_file_put_contents)
@@ -3177,7 +3190,9 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(stream_get_contents,												arginfo_stream_get_contents)
 	PHP_FE(stream_supports_lock,											arginfo_stream_supports_lock)
 	PHP_FE(fgetcsv,															arginfo_fgetcsv)
+	PHP_FALIAS(fget_csv,		fgetcsv,									arginfo_fgetcsv)
 	PHP_FE(fputcsv,															arginfo_fputcsv)
+	PHP_FALIAS(fput_csv,		fputcsv,									arginfo_fputcsv)
 	PHP_FE(flock,															arginfo_flock)
 	PHP_FE(get_meta_tags,													arginfo_get_meta_tags)
 	PHP_FE(stream_set_read_buffer,											arginfo_stream_set_read_buffer)
@@ -3213,6 +3228,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 #ifdef HAVE_FNMATCH
 	PHP_FE(fnmatch,															arginfo_fnmatch)
+	PHP_FALIAS(file_name_match,		fnmatch,								arginfo_fnmatch)
 #endif
 
 	/* functions from fsock.c */
@@ -3250,14 +3266,23 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 #endif
 	/* functions from filestat.c */
 	PHP_FE(fileatime,														arginfo_fileatime)
+	PHP_FALIAS(file_atime,			fileatime,								arginfo_fileatime)
 	PHP_FE(filectime,														arginfo_filectime)
+	PHP_FALIAS(file_ctime,			filectime,								arginfo_filectime)
 	PHP_FE(filegroup,														arginfo_filegroup)
+	PHP_FALIAS(file_group,			filegroup,								arginfo_filegroup)
 	PHP_FE(fileinode,														arginfo_fileinode)
+	PHP_FALIAS(file_inode,			fileinode,								arginfo_fileinode)
 	PHP_FE(filemtime,														arginfo_filemtime)
+	PHP_FALIAS(file_mtime,			filemtime,								arginfo_filemtime)
 	PHP_FE(fileowner,														arginfo_fileowner)
+	PHP_FALIAS(file_owner,			fileowner,								arginfo_fileowner)
 	PHP_FE(fileperms,														arginfo_fileperms)
+	PHP_FALIAS(file_perms,			fileperms,								arginfo_fileperms)
 	PHP_FE(filesize,														arginfo_filesize)
+	PHP_FALIAS(file_size,			filesize,								arginfo_filesize)
 	PHP_FE(filetype,														arginfo_filetype)
+	PHP_FALIAS(file_type,			filetype,								arginfo_filetype)
 	PHP_FE(file_exists,														arginfo_file_exists)
 	PHP_FE(is_writable,														arginfo_is_writable)
 	PHP_FALIAS(is_writeable,		is_writable,							arginfo_is_writable)
@@ -3267,22 +3292,27 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(is_dir,															arginfo_is_dir)
 	PHP_FE(is_link,															arginfo_is_link)
 	PHP_NAMED_FE(stat,				php_if_stat,							arginfo_stat)
+	PHP_NAMED_FE(file_stat,			php_if_stat,							arginfo_stat)
 	PHP_NAMED_FE(lstat,				php_if_lstat,							arginfo_lstat)
+	PHP_NAMED_FE(link_stat,			php_if_lstat,							arginfo_lstat)
 #ifndef NETWARE
 	PHP_FE(chown,															arginfo_chown)
 	PHP_FE(chgrp,															arginfo_chgrp)
 #endif
 #if HAVE_LCHOWN
 	PHP_FE(lchown,															arginfo_lchown)
+	PHP_FALIAS(link_own,			lchown,									arginfo_lchown)
 #endif
 #if HAVE_LCHOWN
 	PHP_FE(lchgrp,															arginfo_lchgrp)
+	PHP_FALIAS(link_chgrp,			lchgrp,									arginfo_lchgrp)
 #endif
 	PHP_FE(chmod,															arginfo_chmod)
 #if HAVE_UTIME
 	PHP_FE(touch,															arginfo_touch)
 #endif
 	PHP_FE(clearstatcache,													arginfo_clearstatcache)
+	PHP_FALIAS(file_stat_clear_cache, clearstatcache,						arginfo_clearstatcache)
 	PHP_FE(disk_total_space,												arginfo_disk_total_space)
 	PHP_FE(disk_free_space,													arginfo_disk_free_space)
 	PHP_FALIAS(diskfreespace,				disk_free_space,				arginfo_disk_free_space)
