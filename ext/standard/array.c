@@ -1332,7 +1332,6 @@ PHP_FUNCTION(in_array)
 #endif
     
 	php_search_array(value, array, strict, return_value, 0);
-    RETURN_BOOL(return_value);
 }
 /* }}} */
 
@@ -1358,7 +1357,6 @@ PHP_FUNCTION(array_in)
 #endif
     
     php_search_array(value, array, strict, return_value, 0);
-    RETURN_BOOL(return_value)
 }
 /* }}} */
 
@@ -1385,7 +1383,6 @@ PHP_FUNCTION(array_search)
 #endif
     
 	php_search_array(value, array, strict, return_value, 1);
-    RETURN_BOOL(return_value);
 }
 /* }}} */
 
