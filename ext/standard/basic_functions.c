@@ -2682,9 +2682,12 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(bin2hex,															arginfo_bin2hex)
 	PHP_FE(hex2bin,															arginfo_hex2bin)
 	PHP_FE(sleep,															arginfo_sleep)
+	PHP_FALIAS(time_sleep,			sleep,									arginfo_sleep)
 	PHP_FE(usleep,															arginfo_usleep)
+	PHP_FALIAS(time_micro_sleep,	usleep,									arginfo_usleep)
 #if HAVE_NANOSLEEP
 	PHP_FE(time_nanosleep,													arginfo_time_nanosleep)
+	PHP_FALIAS(time_nano_sleep,		time_nanosleep,							arginfo_time_nanosleep)
 	PHP_FE(time_sleep_until,												arginfo_time_sleep_until)
 #endif
 
@@ -2718,8 +2721,11 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(image_type_to_extension,											arginfo_image_type_to_extension)
 
 	PHP_FE(phpinfo,															arginfo_phpinfo)
+	PHP_FALIAS(php_info,			phpinfo,								arginfo_phpinfo)
 	PHP_FE(phpversion,														arginfo_phpversion)
+	PHP_FALIAS(php_version,			phpversion,								arginfo_phpversion)
 	PHP_FE(phpcredits,														arginfo_phpcredits)
+	PHP_FALIAS(php_credits,			phpcredits,								arginfo_phpcredits)
 	PHP_FE(php_sapi_name,													arginfo_php_sapi_name)
 	PHP_FE(php_uname,														arginfo_php_uname)
 	PHP_FE(php_ini_scanned_files,											arginfo_php_ini_scanned_files)
@@ -2856,11 +2862,17 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FALIAS(str_sscanf,			sscanf,									arginfo_sscanf)
 	PHP_FE(fscanf,															arginfo_fscanf)
 	PHP_FE(parse_url,														arginfo_parse_url)
+	PHP_FALIAS(url_parse,			parse_url,								arginfo_parse_url)
 	PHP_FE(urlencode,														arginfo_urlencode)
+	PHP_FALIAS(url_encode,			urlencode,								arginfo_urlencode)
 	PHP_FE(urldecode,														arginfo_urldecode)
+	PHP_FALIAS(url_decode,			urldecode,								arginfo_urldecode)
 	PHP_FE(rawurlencode,													arginfo_rawurlencode)
+	PHP_FALIAS(url_raw_encode,		rawurlencode,							arginfo_rawurlencode)
 	PHP_FE(rawurldecode,													arginfo_rawurldecode)
+	PHP_FALIAS(url_raw_decode,		rawurldecode,							arginfo_rawurldecode)
 	PHP_FE(http_build_query,												arginfo_http_build_query)
+	PHP_FALIAS(url_build_query,		http_build_query,						arginfo_http_build_query)
 
 #if defined(HAVE_SYMLINK) || defined(PHP_WIN32)
 	PHP_FE(readlink,														arginfo_readlink)
@@ -2920,10 +2932,15 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 #endif
 
 	PHP_FE(getmyuid,														arginfo_getmyuid)
+	PHP_FALIAS(get_my_uid,			getmyuid,								arginfo_getmyuid)
 	PHP_FE(getmygid,														arginfo_getmygid)
+	PHP_FALIAS(get_my_gid,			getmygid,								arginfo_getmygid)
 	PHP_FE(getmypid,														arginfo_getmypid)
+	PHP_FALIAS(get_my_pid,			getmypid,								arginfo_getmypid)
 	PHP_FE(getmyinode,														arginfo_getmyinode)
+	PHP_FALIAS(get_my_inode,		getmyinode,								arginfo_getmyinode)
 	PHP_FE(getlastmod,														arginfo_getlastmod)
+	PHP_FALIAS(get_last_mod,		getlastmod,								arginfo_getlastmod)
 
 	PHP_FE(base64_decode,													arginfo_base64_decode)
 	PHP_FE(base64_encode,													arginfo_base64_encode)
@@ -2987,14 +3004,18 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(long2ip,															arginfo_long2ip)
 
 	PHP_FE(getenv,															arginfo_getenv)
+	PHP_FALIAS(get_env,				getenv,									arginfo_getenv)
 #ifdef HAVE_PUTENV
 	PHP_FE(putenv,															arginfo_putenv)
+	PHP_FALIAS(put_env,				putenv,									arginfo_putenv)
 #endif
 
 	PHP_FE(getopt,															arginfo_getopt)
+	PHP_FALIAS(get_opt,				getopt,									arginfo_getopt)
 
 #ifdef HAVE_GETLOADAVG
 	PHP_FE(sys_getloadavg,													arginfo_sys_getloadavg)
+	PHP_FALIAS(sys_get_load_avg,	sys_getloadavg,							arginfo_sys_getloadavg)
 #endif
 #ifdef HAVE_GETTIMEOFDAY
 	PHP_FE(microtime,														arginfo_microtime)
@@ -3003,22 +3024,27 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 #ifdef HAVE_GETRUSAGE
 	PHP_FE(getrusage,														arginfo_getrusage)
+	PHP_FALIAS(get_rusage,			getrusage,								arginfo_getrusage)
 #endif
 
 #ifdef HAVE_GETTIMEOFDAY
 	PHP_FE(uniqid,															arginfo_uniqid)
+	PHP_FALIAS(time_unique_id,		uniqid,									arginfo_uniqid)
 #endif
 
 	PHP_FE(quoted_printable_decode,											arginfo_quoted_printable_decode)
 	PHP_FE(quoted_printable_encode,											arginfo_quoted_printable_encode)
 	PHP_FE(convert_cyr_string,												arginfo_convert_cyr_string)
 	PHP_FE(get_current_user,												arginfo_get_current_user)
+	PHP_FALIAS(php_current_user,	get_current_user,						arginfo_get_current_user)
 	PHP_FE(set_time_limit,													arginfo_set_time_limit)
+	PHP_FALIAS(php_time_limit,		set_time_limit,							arginfo_set_time_limit)
 	PHP_FE(header_register_callback,										arginfo_header_register_callback)
 	PHP_FE(get_cfg_var,														arginfo_get_cfg_var)
+	PHP_FALIAS(php_cfg_var,			get_cfg_var,							arginfo_get_cfg_var)
 
-	PHP_FE(get_magic_quotes_gpc,										arginfo_get_magic_quotes_gpc)
-	PHP_FE(get_magic_quotes_runtime,									arginfo_get_magic_quotes_runtime)
+	PHP_FE(get_magic_quotes_gpc,											arginfo_get_magic_quotes_gpc)
+	PHP_FE(get_magic_quotes_runtime,										arginfo_get_magic_quotes_runtime)
 
 	PHP_FE(error_log,														arginfo_error_log)
 	PHP_FE(error_get_last,													arginfo_error_get_last)
@@ -3026,7 +3052,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FALIAS(function_call_user,	call_user_func,							arginfo_call_user_func)
 	PHP_FE(call_user_func_array,											arginfo_call_user_func_array)
 	PHP_FALIAS(function_call_user_array, call_user_func_array,				arginfo_call_user_func_array)
-	PHP_FE(forward_static_call,											arginfo_forward_static_call)
+	PHP_FE(forward_static_call,												arginfo_forward_static_call)
 	PHP_FALIAS(function_static_call, forward_static_call,					arginfo_forward_static_call)
 	PHP_FE(forward_static_call_array,										arginfo_forward_static_call_array)
 	PHP_FALIAS(function_static_call_array, forward_static_call_array,		arginfo_forward_static_call_array)
@@ -3043,23 +3069,27 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(register_shutdown_function,										arginfo_register_shutdown_function)
 	PHP_FALIAS(function_shutdown_register, register_shutdown_function,		arginfo_register_shutdown_function)
 	PHP_FE(register_tick_function,											arginfo_register_tick_function)
-	PHP_FALIAS(function_tick_register, register_tick_function,				arginfo_register_tick_function)
+	PHP_FALIAS(function_tick_register,	register_tick_function,				arginfo_register_tick_function)
 	PHP_FE(unregister_tick_function,										arginfo_unregister_tick_function)
 	PHP_FALIAS(function_tick_unregister, unregister_tick_function,			arginfo_unregister_tick_function)
 
 	PHP_FE(highlight_file,													arginfo_highlight_file)
-	PHP_FALIAS(show_source,			highlight_file,							arginfo_highlight_file)
+	PHP_FALIAS(show_source,				highlight_file,						arginfo_highlight_file)
 	PHP_FE(highlight_string,												arginfo_highlight_string)
 	PHP_FE(php_strip_whitespace,											arginfo_php_strip_whitespace)
+	PHP_FALIAS(php_strip_white_space,	php_strip_whitespace,				arginfo_php_strip_whitespace)
 
 	PHP_FE(ini_get,															arginfo_ini_get)
 	PHP_FE(ini_get_all,														arginfo_ini_get_all)
 	PHP_FE(ini_set,															arginfo_ini_set)
-	PHP_FALIAS(ini_alter,			ini_set,								arginfo_ini_set)
+	PHP_FALIAS(ini_alter,				ini_set,							arginfo_ini_set)
 	PHP_FE(ini_restore,														arginfo_ini_restore)
 	PHP_FE(get_include_path,												arginfo_get_include_path)
+	PHP_FALIAS(php_include_path_get,	get_include_path,					arginfo_get_include_path)
 	PHP_FE(set_include_path,												arginfo_set_include_path)
+	PHP_FALIAS(php_include_path_set,	set_include_path,					arginfo_set_include_path)
 	PHP_FE(restore_include_path,											arginfo_restore_include_path)
+	PHP_FALIAS(php_include_path_restore,restore_include_path,				arginfo_restore_include_path)
 
 	PHP_FE(setcookie,														arginfo_setcookie)
 	PHP_FE(setrawcookie,													arginfo_setrawcookie)
@@ -3104,12 +3134,18 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 	/* functions from type.c */
 	PHP_FE(intval,															arginfo_intval)
+	PHP_FALIAS(int_val,				intval,									arginfo_intval)
 	PHP_FE(floatval,														arginfo_floatval)
 	PHP_FALIAS(doubleval,			floatval,								arginfo_floatval)
+	PHP_FALIAS(double_val,			floatval,								arginfo_floatval)
 	PHP_FE(strval,															arginfo_strval)
+	PHP_FALIAS(str_val,				strval,									arginfo_strval)
 	PHP_FE(boolval,															arginfo_boolval)
+	PHP_FALIAS(bool_val,			boolval,								arginfo_boolval)
 	PHP_FE(gettype,															arginfo_gettype)
+	PHP_FALIAS(type_get,			gettype,								arginfo_gettype)
 	PHP_FE(settype,															arginfo_settype)
+	PHP_FALIAS(type_set,			settype,								arginfo_settype)
 	PHP_FE(is_null,															arginfo_is_null)
 	PHP_FE(is_resource,														arginfo_is_resource)
 	PHP_FE(is_bool,															arginfo_is_bool)
@@ -3195,6 +3231,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FALIAS(fput_csv,		fputcsv,									arginfo_fputcsv)
 	PHP_FE(flock,															arginfo_flock)
 	PHP_FE(get_meta_tags,													arginfo_get_meta_tags)
+	PHP_FALIAS(url_meta_tags,	get_meta_tags,								arginfo_get_meta_tags)
 	PHP_FE(stream_set_read_buffer,											arginfo_stream_set_read_buffer)
 	PHP_FE(stream_set_write_buffer,											arginfo_stream_set_write_buffer)
 	PHP_FALIAS(set_file_buffer, stream_set_write_buffer,					arginfo_stream_set_write_buffer)
@@ -3212,8 +3249,9 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(stream_get_wrappers,												arginfo_stream_get_wrappers)
 	PHP_FE(stream_get_transports,											arginfo_stream_get_transports)
 	PHP_FE(stream_resolve_include_path,										arginfo_stream_resolve_include_path)
-	PHP_FE(stream_is_local,												arginfo_stream_is_local)
+	PHP_FE(stream_is_local,													arginfo_stream_is_local)
 	PHP_FE(get_headers,														arginfo_get_headers)
+	PHP_FALIAS(url_headers,		get_headers,								arginfo_get_headers)
 
 #if HAVE_SYS_TIME_H || defined(PHP_WIN32)
 	PHP_FE(stream_set_timeout,												arginfo_stream_set_timeout)

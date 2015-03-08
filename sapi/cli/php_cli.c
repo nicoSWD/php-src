@@ -483,6 +483,7 @@ ZEND_END_ARG_INFO()
 
 static const zend_function_entry additional_functions[] = {
 	ZEND_FE(dl, arginfo_dl)
+	ZEND_FALIAS(php_dl, dl, arginfo_dl)
 	PHP_FE(cli_set_process_title,        arginfo_cli_set_process_title)
 	PHP_FE(cli_get_process_title,        arginfo_cli_get_process_title)
 	{NULL, NULL, NULL}
