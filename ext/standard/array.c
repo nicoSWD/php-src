@@ -1314,23 +1314,23 @@ static inline void php_search_array(zval *value, zval *array, zend_bool strict, 
    Checks if the given value exists in the array */
 PHP_FUNCTION(in_array)
 {
-    zval *value;				/* value to check for */
-    zval *array;				/* array to check in */
-    zend_bool strict = 0;
-    
+	zval *value;				/* value to check for */
+	zval *array;				/* array to check in */
+	zend_bool strict = 0;
+	
 #ifndef FAST_ZPP
-    if (zend_parse_parameters(ZEND_NUM_ARGS(), "za|b", &value, &array, &strict) == FAILURE) {
-        return;
-    }
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "za|b", &value, &array, &strict) == FAILURE) {
+		return;
+	}
 #else
-    ZEND_PARSE_PARAMETERS_START(2, 3)
-    Z_PARAM_ZVAL(value)
-    Z_PARAM_ARRAY(array)
-    Z_PARAM_OPTIONAL
-    Z_PARAM_BOOL(strict)
-    ZEND_PARSE_PARAMETERS_END();
+	ZEND_PARSE_PARAMETERS_START(2, 3)
+	Z_PARAM_ZVAL(value)
+	Z_PARAM_ARRAY(array)
+	Z_PARAM_OPTIONAL
+	Z_PARAM_BOOL(strict)
+	ZEND_PARSE_PARAMETERS_END();
 #endif
-    
+	
 	php_search_array(value, array, strict, return_value, 0);
 }
 /* }}} */
@@ -1339,24 +1339,24 @@ PHP_FUNCTION(in_array)
  Checks if the given value exists in the array */
 PHP_FUNCTION(array_in)
 {
-    zval *value;		/* value to check for */
-    zval *array;				/* pointer to array entry */
-    zend_bool strict = 0;		/* strict comparison or not */
-    
+	zval *value;		/* value to check for */
+	zval *array;				/* pointer to array entry */
+	zend_bool strict = 0;		/* strict comparison or not */
+	
 #ifndef FAST_ZPP
-    if (zend_parse_parameters(ZEND_NUM_ARGS(), "az|b", &array, &value, &strict) == FAILURE) {
-        return;
-    }
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "az|b", &array, &value, &strict) == FAILURE) {
+		return;
+	}
 #else
-    ZEND_PARSE_PARAMETERS_START(2, 3)
-    Z_PARAM_ARRAY(array)
-    Z_PARAM_ZVAL(value)
-    Z_PARAM_OPTIONAL
-    Z_PARAM_BOOL(strict)
-    ZEND_PARSE_PARAMETERS_END();
+	ZEND_PARSE_PARAMETERS_START(2, 3)
+	Z_PARAM_ARRAY(array)
+	Z_PARAM_ZVAL(value)
+	Z_PARAM_OPTIONAL
+	Z_PARAM_BOOL(strict)
+	ZEND_PARSE_PARAMETERS_END();
 #endif
-    
-    php_search_array(value, array, strict, return_value, 0);
+	
+	php_search_array(value, array, strict, return_value, 0);
 }
 /* }}} */
 
@@ -1364,24 +1364,24 @@ PHP_FUNCTION(array_in)
    Searches the array for a given value and returns the corresponding key if successful */
 PHP_FUNCTION(array_search)
 {
-    zval *value,		/* value to check for */
-    *array,				/* array to check in */
-    *entry;				/* pointer to array entry */
-    zend_bool strict = 0;		/* strict comparison or not */
-    
+	zval *value,		/* value to check for */
+	*array,				/* array to check in */
+	*entry;				/* pointer to array entry */
+	zend_bool strict = 0;		/* strict comparison or not */
+	
 #ifndef FAST_ZPP
-    if (zend_parse_parameters(ZEND_NUM_ARGS(), "b|za", &array, &value, &strict) == FAILURE) {
-        return;
-    }
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "b|za", &array, &value, &strict) == FAILURE) {
+		return;
+	}
 #else
-    ZEND_PARSE_PARAMETERS_START(2, 3)
-    Z_PARAM_ARRAY(array)
-    Z_PARAM_ZVAL(value)
-    Z_PARAM_OPTIONAL
-    Z_PARAM_BOOL(strict)
-    ZEND_PARSE_PARAMETERS_END();
+	ZEND_PARSE_PARAMETERS_START(2, 3)
+	Z_PARAM_ARRAY(array)
+	Z_PARAM_ZVAL(value)
+	Z_PARAM_OPTIONAL
+	Z_PARAM_BOOL(strict)
+	ZEND_PARSE_PARAMETERS_END();
 #endif
-    
+	
 	php_search_array(value, array, strict, return_value, 1);
 }
 /* }}} */
@@ -2010,7 +2010,7 @@ static void php_splice(HashTable *in_hash, int offset, int length, HashTable *re
 	HashTable 	 out_hash;			/* Output hashtable */
 	int			 num_in,			/* Number of entries in the input hashtable */
 				 pos;				/* Current position in the hashtable */
-	uint         idx;
+	uint    	 idx;
 	Bucket		*p;					/* Pointer to hash bucket */
 	zval		*entry;				/* Hash entry */
 	uint32_t    iter_pos = zend_hash_iterators_lower_pos(in_hash, 0);
