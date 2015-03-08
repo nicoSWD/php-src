@@ -2761,6 +2761,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(basename,														arginfo_basename)
 	PHP_FALIAS(path_base_name,		basename,								arginfo_basename)
 	PHP_FE(dirname,															arginfo_dirname)
+	PHP_FALIAS(dir_name,			dirname,								arginfo_dirname)
 	PHP_FE(pathinfo,														arginfo_pathinfo)
 	PHP_FALIAS(path_info,			pathinfo,								arginfo_pathinfo)
 	PHP_FE(stripslashes,													arginfo_stripslashes)
@@ -3171,6 +3172,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(rewind,															arginfo_rewind)
 	PHP_FALIAS(frewind,				rewind,									arginfo_rewind)
 	PHP_FE(rmdir,															arginfo_rmdir)
+	PHP_FALIAS(dir_delete,			rmdir,									arginfo_rmdir)
 	PHP_FE(umask,															arginfo_umask)
 	PHP_FE(fclose,															arginfo_fclose)
 	PHP_FE(feof,															arginfo_feof)
@@ -3188,6 +3190,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(fwrite,															arginfo_fwrite)
 	PHP_FALIAS(fputs,				fwrite,									arginfo_fwrite)
 	PHP_FE(mkdir,															arginfo_mkdir)
+	PHP_FALIAS(dir_create,			mkdir,									arginfo_mkdir)
 	PHP_FE(rename,															arginfo_rename)
 	PHP_FE(copy,															arginfo_copy)
 	PHP_FALIAS(file_copy,			copy,									arginfo_copy)
@@ -3287,20 +3290,28 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 	/* functions from dir.c */
 	PHP_FE(opendir,															arginfo_opendir)
+	PHP_FALIAS(dir_open,			opendir,								arginfo_opendir)
 	PHP_FE(closedir,														arginfo_closedir)
+	PHP_FALIAS(dir_close,			closedir,								arginfo_closedir)
 	PHP_FE(chdir,															arginfo_chdir)
+	PHP_FALIAS(dir_set,				chdir,									arginfo_chdir)
 
 #if defined(HAVE_CHROOT) && !defined(ZTS) && ENABLE_CHROOT_FUNC
 	PHP_FE(chroot,															arginfo_chroot)
 #endif
 
 	PHP_FE(getcwd,															arginfo_getcwd)
+	PHP_FALIAS(dir_get,				getcwd,									arginfo_getcwd)
 	PHP_FE(rewinddir,														arginfo_rewinddir)
+	PHP_FALIAS(dir_rewind,			rewinddir,								arginfo_rewinddir)
 	PHP_NAMED_FE(readdir,			php_if_readdir,							arginfo_readdir)
+	PHP_NAMED_FE(dir_read,			php_if_readdir,							arginfo_readdir)
 	PHP_FALIAS(dir,					getdir,									arginfo_dir)
 	PHP_FE(scandir,															arginfo_scandir)
+	PHP_FALIAS(dir_scan,			scandir,								arginfo_scandir)
 #ifdef HAVE_GLOB
 	PHP_FE(glob,															arginfo_glob)
+	PHP_FALIAS(dir_glob,			glob,									arginfo_glob)
 #endif
 	/* functions from filestat.c */
 	PHP_FE(fileatime,														arginfo_fileatime)
@@ -3335,7 +3346,9 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_NAMED_FE(link_stat,			php_if_lstat,							arginfo_lstat)
 #ifndef NETWARE
 	PHP_FE(chown,															arginfo_chown)
+	PHP_FALIAS(dir_chown,			chown,									arginfo_chown)
 	PHP_FE(chgrp,															arginfo_chgrp)
+	PHP_FALIAS(dir_chgrp,			chgrp,									arginfo_chgrp)
 #endif
 #if HAVE_LCHOWN
 	PHP_FE(lchown,															arginfo_lchown)
@@ -3346,6 +3359,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FALIAS(link_chgrp,			lchgrp,									arginfo_lchgrp)
 #endif
 	PHP_FE(chmod,															arginfo_chmod)
+	PHP_FALIAS(dir_chmod,			chmod,									arginfo_chmod)
 #if HAVE_UTIME
 	PHP_FE(touch,															arginfo_touch)
 #endif
