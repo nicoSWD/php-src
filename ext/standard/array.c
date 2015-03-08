@@ -1228,31 +1228,15 @@ PHP_FUNCTION(array_walk_recursive)
 }
 /* }}} */
 
-/* void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
+/* void php_search_array(zval *value, zval *array, zend_bool strict, int behavior)
  * 0 = return boolean
  * 1 = return key
  */
-static inline void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior) /* {{{ */
+static inline void php_search_array(zval *value, zval *array, zend_bool strict, zval *return_value, int behavior) /* {{{ */
 {
-	zval *value,				/* value to check for */
-		 *array,				/* array to check in */
-		 *entry;				/* pointer to array entry */
+	zval *entry;
 	zend_ulong num_idx;
 	zend_string *str_idx;
-	zend_bool strict = 0;		/* strict comparison or not */
-
-#ifndef FAST_ZPP
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "za|b", &value, &array, &strict) == FAILURE) {
-		return;
-	}
-#else
-	ZEND_PARSE_PARAMETERS_START(2, 3)
-		Z_PARAM_ZVAL(value)
-		Z_PARAM_ARRAY(array)
-		Z_PARAM_OPTIONAL
-		Z_PARAM_BOOL(strict)
-	ZEND_PARSE_PARAMETERS_END();
-#endif
 
 	if (strict) {
 		zval res;					/* comparison result */
@@ -1330,7 +1314,51 @@ static inline void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior) 
    Checks if the given value exists in the array */
 PHP_FUNCTION(in_array)
 {
-	php_search_array(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+    zval *value;				/* value to check for */
+    zval *array;				/* array to check in */
+    zend_bool strict = 0;
+    
+#ifndef FAST_ZPP
+    if (zend_parse_parameters(ZEND_NUM_ARGS(), "za|b", &value, &array, &strict) == FAILURE) {
+        return;
+    }
+#else
+    ZEND_PARSE_PARAMETERS_START(2, 3)
+    Z_PARAM_ZVAL(value)
+    Z_PARAM_ARRAY(array)
+    Z_PARAM_OPTIONAL
+    Z_PARAM_BOOL(strict)
+    ZEND_PARSE_PARAMETERS_END();
+#endif
+    
+	php_search_array(value, array, strict, return_value, 0);
+    RETURN_BOOL(return_value);
+}
+/* }}} */
+
+/* {{{ proto bool array_in(array haystack, mixed needle [, bool strict])
+ Checks if the given value exists in the array */
+PHP_FUNCTION(array_in)
+{
+    zval *value;		/* value to check for */
+    zval *array;				/* pointer to array entry */
+    zend_bool strict = 0;		/* strict comparison or not */
+    
+#ifndef FAST_ZPP
+    if (zend_parse_parameters(ZEND_NUM_ARGS(), "az|b", &array, &value, &strict) == FAILURE) {
+        return;
+    }
+#else
+    ZEND_PARSE_PARAMETERS_START(2, 3)
+    Z_PARAM_ARRAY(array)
+    Z_PARAM_ZVAL(value)
+    Z_PARAM_OPTIONAL
+    Z_PARAM_BOOL(strict)
+    ZEND_PARSE_PARAMETERS_END();
+#endif
+    
+    php_search_array(value, array, strict, return_value, 0);
+    RETURN_BOOL(return_value)
 }
 /* }}} */
 
@@ -1338,7 +1366,26 @@ PHP_FUNCTION(in_array)
    Searches the array for a given value and returns the corresponding key if successful */
 PHP_FUNCTION(array_search)
 {
-	php_search_array(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+    zval *value,		/* value to check for */
+    *array,				/* array to check in */
+    *entry;				/* pointer to array entry */
+    zend_bool strict = 0;		/* strict comparison or not */
+    
+#ifndef FAST_ZPP
+    if (zend_parse_parameters(ZEND_NUM_ARGS(), "b|za", &array, &value, &strict) == FAILURE) {
+        return;
+    }
+#else
+    ZEND_PARSE_PARAMETERS_START(2, 3)
+    Z_PARAM_ARRAY(array)
+    Z_PARAM_ZVAL(value)
+    Z_PARAM_OPTIONAL
+    Z_PARAM_BOOL(strict)
+    ZEND_PARSE_PARAMETERS_END();
+#endif
+    
+	php_search_array(value, array, strict, return_value, 1);
+    RETURN_BOOL(return_value);
 }
 /* }}} */
 
@@ -2111,7 +2158,7 @@ PHP_FUNCTION(array_push)
 		    new_var;	/* Variable to be pushed */
 	int i,				/* Loop counter */
 		argc;			/* Number of function arguments */
-
+//
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS(), "a/+", &stack, &args, &argc) == FAILURE) {
 		return;
