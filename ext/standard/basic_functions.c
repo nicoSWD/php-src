@@ -3001,9 +3001,13 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(error_log,														arginfo_error_log)
 	PHP_FE(error_get_last,													arginfo_error_get_last)
 	PHP_FE(call_user_func,													arginfo_call_user_func)
+	PHP_FALIAS(function_call_user,	call_user_func,							arginfo_call_user_func)
 	PHP_FE(call_user_func_array,											arginfo_call_user_func_array)
+	PHP_FALIAS(function_call_user_array, call_user_func_array,				arginfo_call_user_func_array)
 	PHP_FE(forward_static_call,											arginfo_forward_static_call)
+	PHP_FALIAS(function_static_call, forward_static_call,					arginfo_forward_static_call)
 	PHP_FE(forward_static_call_array,										arginfo_forward_static_call_array)
+	PHP_FALIAS(function_static_call_array, forward_static_call_array,		arginfo_forward_static_call_array)
 	PHP_FE(serialize,														arginfo_serialize)
 	PHP_FE(unserialize,														arginfo_unserialize)
 
@@ -3015,8 +3019,11 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(memory_get_peak_usage,											arginfo_memory_get_peak_usage)
 
 	PHP_FE(register_shutdown_function,										arginfo_register_shutdown_function)
+	PHP_FALIAS(function_shutdown_register, register_shutdown_function,		arginfo_register_shutdown_function)
 	PHP_FE(register_tick_function,											arginfo_register_tick_function)
+	PHP_FALIAS(function_tick_register, register_tick_function,				arginfo_register_tick_function)
 	PHP_FE(unregister_tick_function,										arginfo_unregister_tick_function)
+	PHP_FALIAS(function_tick_unregister, unregister_tick_function,			arginfo_unregister_tick_function)
 
 	PHP_FE(highlight_file,													arginfo_highlight_file)
 	PHP_FALIAS(show_source,			highlight_file,							arginfo_highlight_file)
