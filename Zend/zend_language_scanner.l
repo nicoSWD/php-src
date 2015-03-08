@@ -1377,6 +1377,10 @@ NEWLINE ("\r"|"\n"|"\r\n")
 	return T_ISSET;
 }
 
+<ST_IN_SCRIPTING>"is_set" {
+	return T_ISSET;
+}
+
 <ST_IN_SCRIPTING>"empty" {
 	return T_EMPTY;
 }
