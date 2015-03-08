@@ -1370,13 +1370,13 @@ PHP_FUNCTION(array_search)
 	zend_bool strict = 0;		/* strict comparison or not */
 	
 #ifndef FAST_ZPP
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "b|za", &array, &value, &strict) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "za|b", &array, &value, &strict) == FAILURE) {
 		return;
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(2, 3)
-	Z_PARAM_ARRAY(array)
 	Z_PARAM_ZVAL(value)
+	Z_PARAM_ARRAY(array)
 	Z_PARAM_OPTIONAL
 	Z_PARAM_BOOL(strict)
 	ZEND_PARSE_PARAMETERS_END();
@@ -1385,6 +1385,7 @@ PHP_FUNCTION(array_search)
 	php_search_array(value, array, strict, return_value, 1);
 }
 /* }}} */
+
 
 static int php_valid_var_name(char *var_name, size_t var_name_len) /* {{{ */
 {
