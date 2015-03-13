@@ -261,9 +261,6 @@ static zend_always_inline zend_ast *zend_ast_create_zval_from_long(zend_long lva
 static zend_always_inline zend_ast *zend_ast_create_binary_op(uint32_t opcode, zend_ast *op0, zend_ast *op1) {
 	return zend_ast_create_ex(ZEND_AST_BINARY_OP, opcode, op0, op1);
 }
-static zend_always_inline zend_ast *zend_ast_create_binary_ts_cmp(uint32_t opcode, zend_ast *op0, zend_ast *op1) {
-	return zend_ast_create_ex(ZEND_AST_TS_CMP, opcode, op0, op1);
-}
 static zend_always_inline zend_ast *zend_ast_create_assign_op(uint32_t opcode, zend_ast *op0, zend_ast *op1) {
 	return zend_ast_create_ex(ZEND_AST_ASSIGN_OP, opcode, op0, op1);
 }
