@@ -1259,7 +1259,6 @@ simple_list:
 		case ZEND_AST_GREATER:                 BINARY_OP(" > ",    180, 181, 181);
 		case ZEND_AST_GREATER_EQUAL:           BINARY_OP(" >= ",   180, 181, 181);
 		case ZEND_AST_AND:                     BINARY_OP(" && ",   130, 130, 131);
-//		case ZEND_AST_TS_CMP:				   BINARY_OP(" ==== ", 171, 171, 171);
 		case ZEND_AST_OR:                      BINARY_OP(" || ",   120, 120, 121);
 		case ZEND_AST_ARRAY_ELEM:
 			if (ast->child[1]) {
