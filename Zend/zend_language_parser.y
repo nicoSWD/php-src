@@ -75,7 +75,7 @@ static YYSIZE_T zend_yytnamerr(char*, const char*);
 %left '|'
 %left '^'
 %left '&'
-%nonassoc T_IS_EQUAL T_IS_NOT_EQUAL T_IS_IDENTICAL T_IS_NOT_IDENTICAL T_SPACESHIP
+%nonassoc T_IS_EQUAL T_IS_NOT_EQUAL T_IS_IDENTICAL T_IS_NOT_IDENTICAL T_SPACESHIP T_IS_IDENTICAL_TS
 %nonassoc '<' T_IS_SMALLER_OR_EQUAL '>' T_IS_GREATER_OR_EQUAL
 %left T_SL T_SR
 %left '+' '-' '.'
@@ -128,6 +128,7 @@ static YYSIZE_T zend_yytnamerr(char*, const char*);
 %token T_IS_EQUAL     "== (T_IS_EQUAL)"
 %token T_IS_NOT_EQUAL "!= (T_IS_NOT_EQUAL)"
 %token T_IS_IDENTICAL "=== (T_IS_IDENTICAL)"
+%token T_IS_IDENTICAL_TS "==== (T_IS_IDENTICAL_TS)"
 %token T_IS_NOT_IDENTICAL "!== (T_IS_NOT_IDENTICAL)"
 %token T_IS_SMALLER_OR_EQUAL "<= (T_IS_SMALLER_OR_EQUAL)"
 %token T_IS_GREATER_OR_EQUAL ">= (T_IS_GREATER_OR_EQUAL)"
@@ -833,6 +834,8 @@ expr_without_variable:
 	|	'~' expr { $$ = zend_ast_create_ex(ZEND_AST_UNARY_OP, ZEND_BW_NOT, $2); }
 	|	expr T_IS_IDENTICAL expr
 			{ $$ = zend_ast_create_binary_op(ZEND_IS_IDENTICAL, $1, $3); }
+	|	expr T_IS_IDENTICAL_TS expr
+			{ $$ = zend_ast_create_binary_op(ZEND_IS_IDENTICAL_TS, $1, $3); }
 	|	expr T_IS_NOT_IDENTICAL expr
 			{ $$ = zend_ast_create_binary_op(ZEND_IS_NOT_IDENTICAL, $1, $3); }
 	|	expr T_IS_EQUAL expr

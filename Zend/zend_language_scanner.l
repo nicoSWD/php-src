@@ -1449,6 +1449,10 @@ NEWLINE ("\r"|"\n"|"\r\n")
 	return T_IS_EQUAL;
 }
 
+<ST_IN_SCRIPTING>"====" {
+	return T_IS_IDENTICAL_TS;
+}
+
 <ST_IN_SCRIPTING>"!="|"<>" {
 	return T_IS_NOT_EQUAL;
 }

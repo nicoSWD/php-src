@@ -856,6 +856,8 @@ ZEND_API binary_op_type get_binary_op(int opcode)
 			return (binary_op_type) concat_function;
 		case ZEND_IS_IDENTICAL:
 			return (binary_op_type) is_identical_function;
+		case ZEND_IS_IDENTICAL_TS:
+			return (binary_op_type) is_identical_ts_function;
 		case ZEND_IS_NOT_IDENTICAL:
 			return (binary_op_type) is_not_identical_function;
 		case ZEND_IS_EQUAL:

@@ -1951,6 +1951,33 @@ ZEND_API int is_identical_function(zval *result, zval *op1, zval *op2) /* {{{ */
 }
 /* }}} */
 
+ZEND_API int is_identical_ts_function(zval *result, zval *op1, zval *op2) /* {{{ */
+{
+	char *leftstr, *rightstr;
+	int cmpresult = 0, j;
+	
+	if (Z_TYPE_P(op1) != IS_STRING || Z_TYPE_P(op2) != IS_STRING) {
+		ZVAL_BOOL(result, false);
+		return FAILURE;
+	}
+
+	if (Z_STRLEN_P(op1) != Z_STRLEN_P(op2)) {
+		ZVAL_BOOL(result, false);
+		return FAILURE;
+	}
+
+	leftstr = Z_STRVAL_P(op1);
+	rightstr = Z_STRVAL_P(op2);
+
+	for (j = 0; j < Z_STRLEN_P(op1); j++) {
+		cmpresult |= leftstr[j] ^ rightstr[j];
+	}
+
+	ZVAL_BOOL(result, cmpresult == 0);
+	return SUCCESS;
+}
+/* }}} */
+
 ZEND_API int is_not_identical_function(zval *result, zval *op1, zval *op2) /* {{{ */
 {
 	if (is_identical_function(result, op1, op2) == FAILURE) {

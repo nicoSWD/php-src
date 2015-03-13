@@ -1244,6 +1244,7 @@ simple_list:
 				case ZEND_BW_AND:              BINARY_OP(" & ",   160, 160, 161);
 				case ZEND_BW_XOR:              BINARY_OP(" ^ ",   150, 150, 151);
 				case ZEND_IS_IDENTICAL:        BINARY_OP(" === ", 170, 171, 171);
+				case ZEND_IS_IDENTICAL_TS:     BINARY_OP(" ==== ", 170, 171, 171);
 				case ZEND_IS_NOT_IDENTICAL:    BINARY_OP(" !== ", 170, 171, 171);
 				case ZEND_IS_EQUAL:            BINARY_OP(" == ",  170, 171, 171);
 				case ZEND_IS_NOT_EQUAL:        BINARY_OP(" != ",  170, 171, 171);
@@ -1255,10 +1256,11 @@ simple_list:
 				EMPTY_SWITCH_DEFAULT_CASE();
 			}
 			break;
-		case ZEND_AST_GREATER:                 BINARY_OP(" > ",   180, 181, 181);
-		case ZEND_AST_GREATER_EQUAL:           BINARY_OP(" >= ",  180, 181, 181);
-		case ZEND_AST_AND:                     BINARY_OP(" && ",  130, 130, 131);
-		case ZEND_AST_OR:                      BINARY_OP(" || ",  120, 120, 121);
+		case ZEND_AST_GREATER:                 BINARY_OP(" > ",    180, 181, 181);
+		case ZEND_AST_GREATER_EQUAL:           BINARY_OP(" >= ",   180, 181, 181);
+		case ZEND_AST_AND:                     BINARY_OP(" && ",   130, 130, 131);
+//		case ZEND_AST_TS_CMP:				   BINARY_OP(" ==== ", 171, 171, 171);
+		case ZEND_AST_OR:                      BINARY_OP(" || ",   120, 120, 121);
 		case ZEND_AST_ARRAY_ELEM:
 			if (ast->child[1]) {
 				zend_ast_export_ex(str, ast->child[1], 80, indent);
