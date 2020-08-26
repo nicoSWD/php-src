@@ -17,6 +17,9 @@
 #include "php_http.h"
 #include "php_ini.h"
 #include "url.h"
+#include "php_fopen_wrappers.h"
+
+ZEND_DECLARE_MODULE_GLOBALS(http)
 
 #define URL_DEFAULT_ARG_SEP "&"
 
@@ -260,5 +263,22 @@ PHP_FUNCTION(http_build_query)
 	smart_str_0(&formstr);
 
 	RETURN_NEW_STR(formstr.s);
+}
+
+PHP_FUNCTION(http_last_response_headers)
+{
+    if (Z_TYPE(HTTP_G(last_headers)) != IS_ARRAY) {
+        RETURN_FALSE;
+    }
+
+    zend_long format = 0;
+
+    ZEND_PARSE_PARAMETERS_START(0, 1)
+        Z_PARAM_OPTIONAL
+        Z_PARAM_LONG(format)
+    ZEND_PARSE_PARAMETERS_END();
+
+    array_init(return_value);
+    parse_http_headers(&HTTP_G(last_headers), return_value, format);
 }
 /* }}} */

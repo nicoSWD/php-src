@@ -80,6 +80,8 @@
 #define HTTP_WRAPPER_HEADER_INIT    1
 #define HTTP_WRAPPER_REDIRECTED     2
 
+ZEND_DECLARE_MODULE_GLOBALS(http)
+
 static inline void strip_header(char *header_bag, char *lc_header_bag,
 		const char *lc_header_name)
 {
@@ -982,9 +984,11 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, const char *pa
 		PHP_URL_REDIRECT_MAX, HTTP_WRAPPER_HEADER_INIT, &headers STREAMS_CC);
 
 	if (!Z_ISUNDEF(headers)) {
+        HTTP_G(last_headers) = headers;
 		if (FAILURE == zend_set_local_var_str(
 				"http_response_header", sizeof("http_response_header")-1, &headers, 1)) {
 			zval_ptr_dtor(&headers);
+			zval_ptr_dtor(&HTTP_G(last_headers));
 		}
 	}
 

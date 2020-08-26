@@ -28,5 +28,6 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 #define php_url_encode_hash(ht, formstr)	php_url_encode_hash_ex((ht), (formstr), NULL, 0, NULL, 0, NULL, 0, NULL)
 
 PHP_FUNCTION(http_build_query);
+PHP_FUNCTION(http_last_response_headers);
 
 #endif
