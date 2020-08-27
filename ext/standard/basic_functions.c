@@ -249,6 +249,7 @@ static const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(rawurlencode,													arginfo_rawurlencode)
 	PHP_FE(rawurldecode,													arginfo_rawurldecode)
 	PHP_FE(http_build_query,												arginfo_http_build_query)
+	PHP_FE(http_last_response_headers,										arginfo_http_last_response_headers)
 
 #if defined(HAVE_SYMLINK) || defined(PHP_WIN32)
 	PHP_FE(readlink,														arginfo_readlink)

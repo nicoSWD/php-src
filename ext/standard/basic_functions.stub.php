@@ -962,6 +962,8 @@ function pfsockopen(string $hostname, int $port = -1, &$errno = null, &$errstr =
 
 function http_build_query(array|object $data, string $numeric_prefix = "", $arg_separator = UNKNOWN, int $enc_type = PHP_QUERY_RFC1738): string|false {}
 
+function http_last_response_headers(bool $format = false): array|false {}
+
 /* image.c */
 
 function image_type_to_mime_type(int $image_type): string {}

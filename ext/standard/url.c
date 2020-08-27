@@ -663,7 +663,6 @@ PHP_FUNCTION(get_headers)
 	char *url;
 	size_t url_len;
 	php_stream *stream;
-	zval *prev_val, *hdr = NULL;
 	zend_long format = 0;
 	zval *zcontext = NULL;
 	php_stream_context *context;
@@ -687,8 +686,16 @@ PHP_FUNCTION(get_headers)
 	}
 
 	array_init(return_value);
+	parse_http_headers(&stream->wrapperdata, return_value, format);
+	php_stream_close(stream);
+}
+/* }}} */
 
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&stream->wrapperdata), hdr) {
+void parse_http_headers(zval *headers, zval *return_value, zend_long format)
+{
+	zval *prev_val, *hdr = NULL;
+
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(headers), hdr) {
 		if (Z_TYPE_P(hdr) != IS_STRING) {
 			continue;
 		}
@@ -709,7 +716,7 @@ no_name_header:
 
 				if ((prev_val = zend_hash_str_find(Z_ARRVAL_P(return_value), Z_STRVAL_P(hdr), (p - Z_STRVAL_P(hdr)))) == NULL) {
 					add_assoc_stringl_ex(return_value, Z_STRVAL_P(hdr), (p - Z_STRVAL_P(hdr)), s, (Z_STRLEN_P(hdr) - (s - Z_STRVAL_P(hdr))));
-				} else { /* some headers may occur more than once, therefor we need to remake the string into an array */
+				} else { /* some headers may occur more than once, therefore we need to remake the string into an array */
 					convert_to_array(prev_val);
 					add_next_index_stringl(prev_val, s, (Z_STRLEN_P(hdr) - (s - Z_STRVAL_P(hdr))));
 				}
@@ -720,7 +727,4 @@ no_name_header:
 			}
 		}
 	} ZEND_HASH_FOREACH_END();
-
-	php_stream_close(stream);
 }
-/* }}} */

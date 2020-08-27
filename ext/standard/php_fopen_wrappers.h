@@ -16,6 +16,16 @@
    +----------------------------------------------------------------------+
 */
 
+ZEND_BEGIN_MODULE_GLOBALS(http)
+    zval last_headers;
+ZEND_END_MODULE_GLOBALS(http)
+
+#ifdef ZTS
+#define HTTP_G(v) TSRMG(http_globals_id, zend_http_globals *, v)
+#else
+#define HTTP_G(v) (http_globals.v)
+#endif
+
 #ifndef PHP_FOPEN_WRAPPERS_H
 #define PHP_FOPEN_WRAPPERS_H
 

@@ -36,6 +36,7 @@ PHPAPI size_t php_raw_url_decode(char *str, size_t len); /* return value: length
 PHPAPI zend_string *php_url_encode(char const *s, size_t len);
 PHPAPI zend_string *php_raw_url_encode(char const *s, size_t len);
 PHPAPI char *php_replace_controlchars_ex(char *str, size_t len);
+void parse_http_headers(zval *headers, zval *return_value, zend_long format);
 
 PHP_FUNCTION(parse_url);
 PHP_FUNCTION(urlencode);
